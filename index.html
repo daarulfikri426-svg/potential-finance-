@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Potential Finance</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #080b12;
+    color: white;
+}
+
+header {
+    padding: 22px;
+    background: #0d111b;
+    border-bottom: 1px solid #202735;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #38d996;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+
+.balance {
+    background: linear-gradient(135deg, #101827, #0d131e);
+    border: 1px solid #202a3a;
+    border-radius: 18px;
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+.label {
+    color: #8d98aa;
+    font-size: 14px;
+}
+
+.money {
+    font-size: 34px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.profit {
+    color: #38d996;
+    margin-top: 8px;
+}
+
+.card {
+    background: #10151f;
+    border: 1px solid #202735;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: 1px solid #293345;
+    background: #080b12;
+    color: white;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #38d996;
+    color: #06100c;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+button:active {
+    transform: scale(.98);
+}
+
+.stock {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid #202735;
+}
+
+.green {
+    color: #38d996;
+}
+
+.red {
+    color: #ff6262;
+}
+
+.chart {
+    height: 180px;
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    padding: 15px 0;
+}
+
+.bar {
+    flex: 1;
+    background: #38d996;
+    border-radius: 5px 5px 0 0;
+    opacity: .8;
+}
+
+footer {
+    text-align: center;
+    color: #687386;
+    padding: 30px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="container">
+        <div class="logo">Potential <span>Finance</span></div>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="balance">
+        <div class="label">Total Saldo</div>
+        <div class="money" id="balance">Rp 100.000</div>
+        <div class="profit">+ Rp 0 • 0%</div>
+    </div>
+
+    <div class="card">
+        <h2>Market</h2>
+
+        <div class="stock">
+            <div>
+                <b>BBCA</b><br>
+                <small>Bank Central Asia</small>
+            </div>
+            <div>
+                <b>Rp 8.500</b><br>
+                <span class="green">+1.25%</span>
+            </div>
+        </div>
+
+        <div class="stock">
+            <div>
+                <b>BBRI</b><br>
+                <small>Bank Rakyat Indonesia</small>
+            </div>
+            <div>
+                <b>Rp 4.200</b><br>
+                <span class="green">+0.72%</span>
+            </div>
+        </div>
+
+        <div class="stock">
+            <div>
+                <b>BMRI</b><br>
+                <small>Bank Mandiri</small>
+            </div>
+            <div>
+                <b>Rp 5.100</b><br>
+                <span class="red">-0.31%</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Simulasi Saldo</h2>
+
+        <input
+            type="number"
+            id="amount"
+            placeholder="Masukkan jumlah uang"
+        >
+
+        <button onclick="addMoney()">
+            Tambah Saldo
+        </button>
+    </div>
+
+    <div class="card">
+        <h2>Grafik</h2>
+
+        <div class="chart">
+            <div class="bar" style="height:35%"></div>
+            <div class="bar" style="height:48%"></div>
+            <div class="bar" style="height:42%"></div>
+            <div class="bar" style="height:65%"></div>
+            <div class="bar" style="height:58%"></div>
+            <div class="bar" style="height:78%"></div>
+            <div class="bar" style="height:70%"></div>
+            <div class="bar" style="height:90%"></div>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    Potential Finance • Simulator belajar keuangan
+</footer>
+
+<script>
+let balance = 100000;
+
+function formatRupiah(number) {
+    return new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+        maximumFractionDigits: 0
+    }).format(number);
+}
+
+function addMoney() {
+    const amount = Number(document.getElementById("amount").value);
+
+    if (amount <= 0) {
+        alert("Masukkan jumlah uang terlebih dahulu.");
+        return;
+    }
+
+    balance += amount;
+
+    document.getElementById("balance").innerText =
+        formatRupiah(balance);
+
+    document.getElementById("amount").value = "";
+}
+</script>
+
+</body>
+  </html>
